@@ -22,6 +22,9 @@
 - **Mapping**: MapStruct (compile-time, not runtime)
 - **Database Migrations**: Flyway (versioned SQL)
 - **Security**: Clerk (OIDC/JWT) with TenantContext for ID isolation
+- **Annotation Ban**: If any class in com.propalert.domain contains an import starting with jakarta.persistence, jakarta.validation, or org.springframework, it is a violation of the Constitution. Alert the user immediately.
+- **Interface Mapping**: OpenAPI generated models (DTOs) must never be used as Domain Entities. MapStruct mappers are the only legal bridge between the Infrastructure/Web layer and the Domain layer.
+- **ThreadLocal Tenancy**: Tenant isolation must be handled via a ThreadLocal TenantContext. The broker_id must be injected into the Hibernate filter via a OncePerRequestFilter in the Security configuration.
 
 ## 4. PROJECT CONTEXT: PROP-ALERT INDIA
 - **Type**: Enterprise Multi-tenant Real Estate CRM (SaaS)
