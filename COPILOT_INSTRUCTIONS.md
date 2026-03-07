@@ -53,12 +53,17 @@
 - If MapStruct/Lombok config is loose → FIX IT
 - If multi-tenancy leaks tenant data → CRITICAL
 
-## 8. CURRENT STATE (v3.1)
-- [X] High-Level Enterprise Pivot (Java 21 / Spring Boot 3.4)
-- [X] Hexagonal Architecture & Multi-tenancy Strategy
-- [X] AI Governance (Gemini Architect / Copilot Builder)
-- 🔄 **Sprint 1.1**: Maven skeleton + toolchain config
-- 📅 **Sprint 1.2**: Physical hexagonal folder structure + openapi.yaml
+# PROP-ALERT INDIA: PROGRESS LOG
 
-## 9. NEXT IMMEDIATE TASK
-Answer the foundational question: **Why would putting @Entity in the Domain layer break the hexagonal contract?**
+## ✅ COMPLETED TASKS
+* [07-Mar-2026] Repository & AI Governance Docs finalized.
+* [07-Mar-2026] Architecture Decisions (Hexagonal/Multi-tenant) locked.
+
+## 🚧 CURRENT TASK (THE SETUP)
+**Sprint 1.0: Local Environment Prep**
+* **Action:** Generate ZIP from Spring Initializr.
+* **Action:** Install JDK 21 and Docker/Postgres.
+* **Goal:** Open the project in the IDE and see a green "Build Success."
+
+## 📅 NEXT CHUNK
+* Sprint 1.1: Customizing pom.xml with OpenAPI & MapStruct plugins.
