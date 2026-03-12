@@ -58,19 +58,24 @@
 
 ## ✅ COMPLETED TASKS
 * [07-Mar-2026] Repository & AI Governance Docs finalized.
-* [07-Mar-2026] Architecture Decisions (Hexagonal/Multi-tenant) locked.
 * [11-Mar-2026] Sprint 1.0: Local Env Prep Complete.
-    - Java 21 & Spring Boot 4.0.3 verified.
-    - Dockerized PostgreSQL (propalert_db) live and healthy.
-    - Build Success (via Maven Wrapper) achieved.
-    - GitHub CLI (gh) authenticated and initial push successful.
+* [12-Mar-2026] Sprint 1.1: Blueprint & Mapping Bridge (OpenAPI/MapStruct wired).
+* [12-Mar-2026] Sprint 1.2: Multi-tenancy (Broker Isolation) - FULLY WIRED.
+    - BrokerContext, BrokerFilter, and BrokerAspect implemented.
+    - Hibernate `brokerFilter` configured on LeadEntity.
+* [12-Mar-2026] Sprint 1.3: Web Entry Point.
+    - HealthController implemented via OpenAPI generated interface.
+    - EnableAspectJAutoProxy activated in Main class.
 
-## 🚧 CURRENT TASK (THE SETUP)
-**Sprint 1.1: Customizing pom.xml with OpenAPI & MapStruct plugins.**
-* **Action:** Define the contract-first Maven plugins.
-* **Action:** Create the initial Hexagonal folder structure (Domain/Application/Infrastructure).
-* **Goal:** Run the build without skipping tests (Database connection verified in code).
+## 🚧 CURRENT TASK (BLOCKER)
+**Spring Property Resolution (Sprint 1.3 Debugging)**
+* **Issue:** Spring Boot is not loading `application.properties` (values returning `null`).
+* **Symptom:** `AuthException: password authentication failed for user "admin"` because Spring is using default/null credentials.
+* **Database State:** Verified `propalert_crm` exists and is accessible via `admin/password123` inside Docker.
+* **Goal:** Resolve the `src/main/resources` classpath issue to get a "Green" startup.
 
 ## 📅 NEXT CHUNK
-* **Sprint 1.2: Multi-tenancy Foundations.**
-    - Action: Implement ThreadLocal TenantContext and OncePerRequestFilter for broker_id isolation.
+* **Sprint 1.4: The Web-to-Persistence Integration.**
+    - Implement `LeadsApiController`.
+    - Create Application Use-Cases to bridge Web and Persistence.
+    - Map OpenAPI `LeadRequest` to `LeadEntity` via MapStruct.
