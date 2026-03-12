@@ -1,0 +1,38 @@
+openapi: 3.0.3
+info:
+  title: Prop-Alert India API
+  version: 1.0.0
+paths:
+  /health:
+    get:
+      summary: System health check
+      responses:
+        '200':
+          description: OK
+  /leads:
+    post:
+      summary: Create a new property lead
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeadRequest'
+      responses:
+        '201':
+          description: Lead created
+
+components:
+  schemas:
+    LeadRequest:
+      type: object
+      required:
+        - customerName
+        - phoneNumber
+      properties:
+        customerName:
+          type: string
+        phoneNumber:
+          type: string
+        propertyInterest:
+          type: string
