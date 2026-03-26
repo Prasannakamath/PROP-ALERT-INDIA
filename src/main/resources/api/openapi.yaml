@@ -7,7 +7,7 @@ paths:
     get:
       summary: System health check
       responses:
-        '200':
+        "200":
           description: OK
   /leads:
     post:
@@ -17,10 +17,35 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LeadRequest'
+              $ref: "#/components/schemas/LeadRequest"
       responses:
-        '201':
+        "201":
           description: Lead created
+  /brokers:
+    post:
+      summary: Onboard a new Broker
+      operationId: onboardBroker
+      tags:
+        - Broker
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BrokerRequest"
+      responses:
+        "201":
+          description: Broker created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  brokerId:
+                    type: string
+                    example: "MH-PUN-KMT-9876"
+        "400":
+          description: Invalid input
 
 components:
   schemas:
@@ -36,3 +61,30 @@ components:
           type: string
         propertyInterest:
           type: string
+    BrokerRequest:
+      type: object
+      required:
+        - organizationName
+        - contactEmail
+        - mobileNumber
+        - city
+        - state
+      properties:
+        organizationName:
+          type: string
+          example: "Kamath Properties"
+        contactEmail:
+          type: string
+          format: email
+          example: "contact@kamathprop.com"
+        mobileNumber:
+          type: string
+          pattern: "^[0-9]{10}$"
+          example: "9876543210"
+          description: "Must be exactly 10 digits"
+        city:
+          type: string
+          example: "Pune"
+        state:
+          type: string
+          example: "Maharashtra"

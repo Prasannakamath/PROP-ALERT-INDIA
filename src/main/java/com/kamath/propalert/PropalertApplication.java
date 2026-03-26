@@ -1,17 +1,25 @@
 package com.kamath.propalert;
 
+// THESE ARE THE MISSING PIECES:
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.core.env.Environment;
 
 @SpringBootApplication
-@EnableAspectJAutoProxy // This turns on our BrokerAspect!
+@EnableAspectJAutoProxy
 public class PropalertApplication {
 
 	public static void main(String[] args) {
-		System.out.println("DEBUG: Connecting with " + System.getProperty("spring.datasource.username"));
-		System.out.println("DEBUG: Connecting with " + System.getProperty("spring.datasource.password"));
-		SpringApplication.run(PropalertApplication.class, args);
-	}
+		// Start the context
+		ApplicationContext context = SpringApplication.run(PropalertApplication.class, args);
 
+		// Debugging the DB connection we fixed
+		Environment env = context.getBean(Environment.class);
+		System.out.println("=========================================");
+		System.out.println("RESOLVED USER: " + env.getProperty("spring.datasource.username"));
+		System.out.println("RESOLVED URL : " + env.getProperty("spring.datasource.url"));
+		System.out.println("=========================================");
+	}
 }
