@@ -66,3 +66,6 @@ Context compression is a reality in long AI pair-programming sessions. To counte
 ## 9. Global Exception Handling
 - **Centralized Handling**: Use a single `@RestControllerAdvice` to intercept all domain and validation exceptions.
 - **RFC 7807 Standard**: Use Spring Boot's built-in `ProblemDetail` object as the standard, uniform JSON response structure for all API errors. No custom error wrappers.
+
+## 11. Strict No-Unnecessary-Files Policy
+- **Zero Ghost Files**: Do not generate any internal artifact files, AI workflow documents, or temporary plan files (e.g., `implementation_plan.md`, `task.md`) to explain steps or maintain state. All guidance, explanations, and code blocks must be provided directly in the conversational chat interface. You must strictly limit file creation only to source code files explicitly requested by the user for the project.
