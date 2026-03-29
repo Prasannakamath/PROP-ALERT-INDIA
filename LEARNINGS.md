@@ -12,6 +12,8 @@ This document catalogs advanced topics, design patterns, and framework features 
 - **Test Execution**: Utilizing Maven (`mvn -Dtest=ClassName test`) to run targeted test classes and methods for extreme fast feedback rather than running the full test suite.
 - **Pure Unit Testing**: Avoiding `@SpringBootTest` for pure business logic. Employing plain unit testing with Mockito to ensure blazing fast execution times and loose coupling from the framework.
 - **Testcontainers**: Utilizing Docker from inside the Java unit test lifecycle to spin up actual PostgreSQL instances during the `@DataJpaTest` phase, entirely skipping the flaws of in-memory H2 databases.
+- **Exception Verification (Failing Fast)**: Utilizing AssertJ's `assertThatThrownBy()` to enforce that downstream layers will blow up appropriately, protecting database integrity.
+- **Fluent Assertions**: Using AssertJ (`assertThat`) instead of standard JUnit `assertEquals` so tests read like plain English, offer strong auto-completion, and provide microscopic diffs on CI/CD failures.
 
 #### 3. API & Error Standardization
 - **RFC 7807 (Problem Details for HTTP APIs)**: A universal networking standard for machine-readable HTTP error payloads.
