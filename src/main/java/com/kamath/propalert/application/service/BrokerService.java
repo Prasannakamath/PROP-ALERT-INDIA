@@ -1,5 +1,6 @@
 package com.kamath.propalert.application.service;
 
+import com.kamath.propalert.domain.exception.DuplicateBrokerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import com.kamath.propalert.infrastructure.persistence.repository.BrokerReposito
 import com.propalert.infrastructure.web.dto.BrokerRequest;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 @Slf4j
 @Service
@@ -44,6 +46,9 @@ public class BrokerService {
                 domain.getOrganizationName(),
                 domain.getMobileNumber());
 
+        if(brokerRepository.existsById(generatedId)){
+            throw new DuplicateBrokerException("Broker already exists");
+        }
         // 4. Map Domain to Entity and inject the Identity
         BrokerEntity entity = brokerMapper.toEntityFromDomain(domain);
         entity.setId(generatedId);
