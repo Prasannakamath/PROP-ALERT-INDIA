@@ -12,18 +12,16 @@ This document catalogs advanced topics, design patterns, and framework features 
 
 ### 1. Software Architecture
 - **Hexagonal Architecture (Ports and Adapters)**: Designing the `Domain` to have zero external dependencies, forcing the `Infrastructure` and `Application` layers to adapt inward instead.
-- **Domain-Driven Design (DDD) Boundaries**: Architecting the system so that Root Tenants (`Brokers`) dictate the boundaries of downstream Activities (`Leads`, `Tenants`).
+- **Domain-Driven Design (DDD) Boundaries**: Architecting the system so that Root Tenants (`Brokers`) dictate the boundaries of downstream Activities.
 
 ### 2. Software Engineering Methodology
-- **Vertical Slicing (Feature-Driven Development)**: The architectural practice of building a system one full feature at a time (from API down to Database) rather than building all databases, then all services, then all APIs. This ensures rapid feedback and complete end-to-end understanding of how layers connect.
-- **Strategic Deconstruction**: Transitioning from a non-CS background directly to Senior level by avoiding "vibe coding" (blind copy-pasting API logic) in favor of understanding the core 'Why' behind data flows, isolation borders, and module decoupling.
+- **Vertical Slicing (Feature-Driven Development)**: The architectural practice of building a system one full feature at a time (from API down to Database).
+- **OpenAPI Modularization (`$ref`)**: Avoiding monolithic YAML files by injecting decoupled endpoint paths and component schemas using relative `$ref` anchors to ensure merge-conflict-free team development.
 
 ### 3. Advanced Testing Strategies
 - **Pure Unit Testing**: Avoiding `@SpringBootTest` for pure business logic to ensure blazing fast test times.
-- **Testcontainers & PostgreSQL**: Utilizing Docker from inside the Java test lifecycle to replicate production environments locally, circumventing the flaws of in-memory H2 databases.
-- **Test State Pollution Handling**: Using `@AfterEach` to truncate tables instead of relying on `@Transactional`, removing the risk of masking ORM lazy-loading bugs.
+- **Testcontainers & PostgreSQL**: Utilizing Docker from inside the Java test lifecycle to replicate production environments locally.
 
 ### 4. API & Data Integrity
-- **RFC 7807 (Problem Details)**: Universal networking standard implemented natively in Spring Boot via `ProblemDetail` for standardized error outputs.
-- **Deterministic Identifiers**: Generating composite database keys instead of raw UUIDs for precise lookup logic.
-- **Spring Data JPA Save Semantics**: Understanding how `.save()` triggers a `SELECT` -> `UPDATE` cycle on custom IDs, dictating manual `.existsById()` checks.
+- **ThreadLocal Context Extraction**: Securing API endpoints by dropping trust in frontend payloads (e.g. ignoring `brokerId`) and extracting identity directly from a thread-bound Security Filter (`BrokerContext`).
+- **MapStruct Bypass & Immutability**: Deliberately using `@Mapping(target="id", ignore=true)` to block API payload attacks from injecting arbitrary database keys.
