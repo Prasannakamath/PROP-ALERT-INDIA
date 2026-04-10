@@ -1,11 +1,11 @@
 package com.kamath.propalert.infrastructure.web.exception;
 
-import com.kamath.propalert.domain.exception.DuplicateBrokerException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.kamath.propalert.domain.exception.DuplicateBrokerException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
