@@ -1,0 +1,29 @@
+components:
+  schemas:
+    BrokerRequest:
+      type: object
+      required:
+        - organizationName
+        - contactEmail
+        - mobileNumber
+        - city
+        - state
+      properties:
+        organizationName:
+          type: string
+          example: "Kamath Properties"
+        contactEmail:
+          type: string
+          format: email
+          example: "contact@kamathprop.com"
+        mobileNumber:
+          type: string
+          pattern: "^[0-9]{10}$"
+          example: "9876543210"
+          description: "Must be exactly 10 digits"
+        city:
+          type: string
+          example: "Pune"
+        state:
+          type: string
+          example: "Maharashtra"
