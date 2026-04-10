@@ -1,25 +1,31 @@
 # PROP-ALERT INDIA: PROGRESS LOG
 
 ## ✅ COMPLETED TASKS
-- **[Governance]**: Established rigorous GEMINI.md rules covering Hexagonal Architecture, MapStruct mapping, and advanced testing strategies.
-- **[Infra]**: Bootstrapped the empty PROGRESS.md and LEARNINGS.md templates for AI state alignment.
-- **[Sprint 1.0-1.1]**: Resolved local Spring profile environments and wired multi-tenancy (Broker Isolation via Hibernate dynamic filters).
-- **[Sprint 1.2 - Broker Onboarding Foundation]**: Completed the "Root Tenant". Delivered Broker Domain Model, Entity (Email/Mobile constraints), Identity Service, MapStruct Mapper, and Web Controller.
-- **[Sprint 1.3 - Unit Testing]**: Completed pure domain unit testing for `BrokerIdentityService` with AssertJ, validating happy paths and boundary exceptions.
-- **[Sprint 1.4 - Integration Testing]**: Completed end-to-end testing with Testcontainers (PostgreSQL). Validated 201 Created (Happy Path), 409 Conflict (Duplicate Tenant), and 400 Bad Request (Bean Validation).
-- **[Sprint 1.5 - Exception Handling]**: Implemented a `@RestControllerAdvice` Global Exception Handler using Spring Boot's RFC 7807 `ProblemDetail`.
 
-## ⚠️ ARCHITECTURAL PIVOTS (MISTAKES & CORRECTIONS)
-- **Pivot 1**: Corrected the architectural flow from "Leads-First" to "Broker-First." A Tenant (Broker) must exist in the database before any downstream Activity (Leads) can be recorded.
-- **Pivot 2**: Shifted from generating Random UUIDs to generating Deterministic IDs (using state + city + mobile suffixes) to ensure absolute business traceability and idempotency.
-- **Decision (Silent Updates)**: Explicitly added `.existsById()` checks in the Application Service before saving entities with deterministic IDs to prevent Spring Data JPA from performing silent `UPDATE`s instead of throwing constraint violations.
-- **Decision (Test Isolation)**: Enforced manual database cleanup (`@AfterEach`) in Integration Tests instead of `@Transactional` to prevent test state pollution without masking lazy-initialization bugs.
+| Category / Sprint | Status | Description |
+| :--- | :---: | :--- |
+| **Governance** | ✅ | Established rigorous GEMINI.md rules covering Hexagonal Architecture, map-struct mappings, testing strategies, and a Ground-Up Mentorship paradigm. |
+| **Infra** | ✅ | Bootstrapped the PROGRESS.md and LEARNINGS.md templates. |
+| **Sprint 1.0-1.1** | ✅ | Resolved local Spring profile environments and wired multi-tenancy (Broker Isolation via Hibernate dynamic filters). |
+| **Sprint 1.2** | ✅ | Completed the "Root Tenant". Delivered Broker Domain Model, Entity, Identity Service, MapStruct Mapper, and Web Controller. |
+| **Sprint 1.3** | ✅ | Completed pure domain unit testing for `BrokerIdentityService` with AssertJ. |
+| **Sprint 1.4** | ✅ | Completed end-to-end testing with Testcontainers (PostgreSQL). Validated 201 Created and API edge cases. |
+| **Sprint 1.5** | ✅ | Implemented a `@RestControllerAdvice` Global Exception Handler using Spring Boot's RFC 7807 `ProblemDetail`. |
+
+## ⚠️ ARCHITECTURAL PIVOTS
+
+| Pivot | Shift | Rationale / Correction |
+| :---: | :--- | :--- |
+| **1** | Leads-First ➡️ Broker-First | A Tenant (Broker) must exist in the database before downstream Activities (Leads) can be recorded due to Database Foreign Key integrity constraints. |
+| **2** | Random UUIDs ➡️ Deterministic | Using composite keys (state + city + mobile) ensures absolute business traceability and idempotency. |
+| **3** | Delivery ➡️ Ground-Up Learning | Shifted to vertical feature slicing preceded by fundamental theory to eliminate "vibe coding" for a non-CS backend transition. |
 
 ## 🚧 CURRENT SPRINT TASK
-**Sprint 2.0 - Leads Domain Foundation**
-- **Goal**: Begin the hexagonal journey for our downstream activity: Property Leads.
-- **Status**: Not started.
+
+| Sprint | Goal | Status |
+| :--- | :--- | :--- |
+| **2.0 - Core Foundation** | Establish the learning-by-doing baseline. | ⏸️ Paused. Awaiting decision on how to approach the Broker flow. |
 
 ## 📅 NEXT CHUNK (Step-by-Step)
-1. Review the `openapi.yaml` contract for the `/leads` endpoint.
-2. Generate DTOs and create the pure Domain Model for `Lead`.
+1. User provides decision: Re-review existing `Broker` code OR Rebuild from scratch.
+2. Formulate Step 1 of the new workflow based on the chosen path.
