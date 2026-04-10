@@ -1,0 +1,23 @@
+components:
+  schemas:
+    LeadRequest:
+      type: object
+      required:
+        - customerName
+        - mobileNumber
+      properties:
+        customerName:
+          type: string
+          example: "Sneha Patel"
+        mobileNumber:
+          type: string
+          pattern: "^[0-9]{10}$"
+          example: "9876543210"
+        propertyInterest:
+          type: string
+          description: "General area or specific property"
+          example: "Andheri West 2BHK"
+        appointmentDate:
+          type: string
+          format: date-time
+          example: "2026-04-12T10:30:00Z"

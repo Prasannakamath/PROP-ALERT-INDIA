@@ -1,24 +1,24 @@
 post:
-  summary: Onboard a new Broker
-  operationId: onboardBroker
+  summary: Register a new property Lead
+  operationId: registerLead
   tags:
-    - Broker
+    - Lead
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: '../schemas/broker-schemas.yaml#/components/schemas/BrokerRequest'
+          $ref: '../schemas/lead-schemas.yaml#/components/schemas/LeadRequest'
   responses:
     "201":
-      description: Broker created successfully
+      description: Lead registered successfully
       content:
         application/json:
           schema:
             type: object
             properties:
-              brokerId:
+              leadId:
                 type: string
-                example: "MH-PUN-KMT-9876"
+                example: "LD-MH-MUM-3210"
     "400":
       description: Invalid input

@@ -10,4 +10,6 @@ paths:
         "200":
           description: OK
   /brokers:
-    $ref: './paths/broker-paths.yaml'
+    $ref: './paths/Broker-paths.yaml'
+  /leads:
+    $ref: './paths/lead-paths.yaml'
