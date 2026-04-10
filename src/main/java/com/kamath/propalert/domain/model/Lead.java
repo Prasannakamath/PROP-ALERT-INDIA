@@ -7,16 +7,16 @@ import lombok.Data;
 @Builder
 public class Lead {
     private String id;
+    private String brokerId;
     private String customerName;
-    private String phoneNumber;
+    private String mobileNumber;
     private String propertyInterest;
+    private String appointmentDate;
 
-    /**
-     * Business Logic: A lead is only valid if it has a name
-     * and a valid 10-digit Indian mobile number.
-     */
+    // Core Business Rule: A valid Lead must be tied to a Broker and have basic contact info
     public boolean isValid() {
-        return customerName != null && !customerName.isBlank()
-                && phoneNumber != null && phoneNumber.matches("\\d{10}");
+        return brokerId != null && !brokerId.isBlank()
+                && customerName != null && !customerName.isBlank()
+                && mobileNumber != null && mobileNumber.length() == 10;
     }
 }
