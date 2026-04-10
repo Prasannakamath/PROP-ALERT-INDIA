@@ -27,9 +27,4 @@ public interface BrokerMapper {
      */
     Broker toDomainFromEntity(BrokerEntity entity);
 
-    // 4. Domain -> Web DTO (The missing piece!)
-    // This allows the Controller to return the Broker details (including the
-    // generated ID)
-    BrokerRequest toDtoFromDomain(Broker domain);
-
 }
