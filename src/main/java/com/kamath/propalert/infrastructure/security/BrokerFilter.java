@@ -2,18 +2,15 @@ package com.kamath.propalert.infrastructure.security;
 
 import java.io.IOException;
 
+import jakarta.servlet.*;
 import org.springframework.stereotype.Component;
 
 import com.kamath.propalert.domain.context.BrokerContext;
 
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Component
-public class BrokerFilter implements jakarta.servlet.Filter {
+public class BrokerFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
